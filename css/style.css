@@ -1374,6 +1374,39 @@ h4, .h4 {
     background-color: #EFDD83;
 }
 
+.btn-border {
+    display: inline-block;
+    text-align: center;
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 500;
+    padding: 28px 82px;
+    position: relative;
+    border-radius: 40px;
+    z-index: 1;
+}
+
+.btn-border::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='40' ry='40' stroke='%231E1E1EFF' stroke-width='1' stroke-dasharray='6%2c 6' stroke-dashoffset='0' stroke-linecap='round'/%3e%3c/svg%3e");
+    border-radius: 40px;
+    opacity: .4;
+    z-index: -1;
+}
+
+.btn-border span {
+    display: inline-block;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(94%, transparent), color-stop(0, rgba(30, 30, 30, 0.2)));
+    background-image: linear-gradient(180deg, transparent 94%, rgba(30, 30, 30, 0.2) 0);
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+}
+
 .feedback-modal__wrap {
     max-width: 412px;
     margin: 0 auto;
@@ -2882,6 +2915,125 @@ ul.breadcrumb li:last-child {
     margin-top: 40px;
 }
 
+.annual-reports {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    max-width: 680px;
+    z-index: 98;
+    background-color: #EFDD83;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    padding: 40px;
+    -webkit-transform: translateX(102%);
+            transform: translateX(102%);
+    -webkit-transition: -webkit-transform .3s;
+    transition: -webkit-transform .3s;
+    transition: transform .3s;
+    transition: transform .3s, -webkit-transform .3s;
+}
+
+.annual-reports.active {
+    -webkit-transform: translateX(0%);
+            transform: translateX(0%);
+}
+
+.annual-reports__close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    opacity: .4;
+}
+
+.annual-reports__title {
+    font-size: 24px;
+    line-height: 28px;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 30px;
+    -ms-flex-negative: 0;
+        flex-shrink: 0;
+}
+
+.annual-reports__wrap {
+    position: relative;
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+}
+
+.annual-reports__list {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.annual-reports__list::-webkit-scrollbar {
+    display: none;
+}
+
+.annual-reports__list.scroll-end + .annual-reports__pl {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.annual-reports__col {
+    position: relative;
+    z-index: 1;
+}
+
+.annual-reports__col::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: repeating-linear-gradient(to right, transparent, transparent 6px, rgba(30, 30, 30, 0.2) 6px, rgba(30, 30, 30, 0.2) 12px);
+    z-index: -1;
+}
+
+.annual-reports__btn {
+    -ms-flex-negative: 0;
+        flex-shrink: 0;
+    margin-top: 30px;
+    text-align: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+}
+
+.annual-reports__pl {
+    position: absolute;
+    bottom: -30px;
+    left: -20px;
+    right: -20px;
+    height: 120px;
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(239, 221, 131, 0)), to(#EFDD83));
+    background: linear-gradient(180deg, rgba(239, 221, 131, 0) 0%, #EFDD83 100%);
+    z-index: 2;
+    -webkit-transition: opacity .25s, visibility .25s;
+    transition: opacity .25s, visibility .25s;
+}
+
 .doc-item {
     padding: 14px 0;
     display: -webkit-box;
@@ -3266,7 +3418,7 @@ ul.breadcrumb li:last-child {
     visibility: hidden;
 }
 
-.about-team__list-item.active {
+.about-team__list-item:not(.hide).active, .about-team__list-item.hover {
     opacity: 1;
     visibility: visible;
 }
@@ -3343,12 +3495,12 @@ ul.breadcrumb li:last-child {
     visibility: hidden;
 }
 
-.about-team__gallery-item.active img:first-child {
+.about-team__gallery-item:not(.hide).active img:first-child, .about-team__gallery-item.hover img:first-child {
     opacity: 0;
     visibility: hidden;
 }
 
-.about-team__gallery-item.active img:last-child {
+.about-team__gallery-item:not(.hide).active img:last-child, .about-team__gallery-item.hover img:last-child {
     opacity: 1;
     visibility: visible;
 }
@@ -5339,6 +5491,27 @@ ul.breadcrumb li:last-child {
         background-color: #1E1E1E;
         color: #fff;
     }
+    .btn-border::before {
+        -webkit-transition: opacity .25s;
+        transition: opacity .25s;
+    }
+    .btn-border span {
+        -webkit-transition: background-size .25s;
+        transition: background-size .25s;
+    }
+    .btn-border:hover::before {
+        opacity: 1;
+    }
+    .btn-border:hover span {
+        background-size: 100% 100%;
+    }
+    .annual-reports__close {
+        -webkit-transition: opacity .25s;
+        transition: opacity .25s;
+    }
+    .annual-reports__close:hover {
+        opacity: 1;
+    }
 }
 
 @media (min-width: 992px) {
@@ -6280,6 +6453,21 @@ ul.breadcrumb li:last-child {
     .create-event-modal__list {
         margin-top: 30px;
     }
+    .annual-reports {
+        max-width: none;
+    }
+    .doc-item__right {
+        display: none;
+    }
+    .doc-item__col {
+        max-width: calc(100% - 54px);
+    }
+    .doc-item__label {
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 }
 
 @media (max-width: 767px) {
@@ -6851,5 +7039,16 @@ ul.breadcrumb li:last-child {
     }
     .feedback-modal__wrap {
         max-width: 100%;
+    }
+    .annual-reports {
+        padding: 40px 10px;
+    }
+    .annual-reports__title {
+        font-size: 18px;
+        line-height: 22px;
+    }
+    .annual-reports__pl {
+        left: -10px;
+        right: -10px;
     }
 }

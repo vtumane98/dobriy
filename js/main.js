@@ -63,6 +63,27 @@ $(document).ready(function() {
         return Math.floor(Math.sqrt(Math.pow(mouseX - (elem.offset().left + (elem.innerWidth() / 2)), 2) + Math.pow(mouseY - (elem.offset().top + (elem.innerHeight() / 2)), 2)));
     }
 
+    //annual reports
+    $(document).on('click', '.js-annual-reports-open', function(){
+        $('.js-annual-reports').toggleClass('active');
+    });
+    $(document).on('click', '.js-annual-reports-close', function(){
+        $('.js-annual-reports').removeClass('active');
+    });
+    $(document).click( function(e){
+		if(!$('.js-annual-reports').is(e.target) && $('.js-annual-reports').has(e.target).length === 0 &&
+        !$('.js-annual-reports-open').is(e.target) && $('.js-annual-reports-open').has(e.target).length === 0){
+			$('.js-annual-reports').removeClass('active');
+		}
+	});
+    $('.js-annual-reports-list').on('load scroll', function(){
+        if ($(this)[0].scrollHeight - $(this).scrollTop() == $(this).outerHeight()) {
+            $(this).addClass('scroll-end');
+        }else{
+            $(this).removeClass('scroll-end');
+        }
+    })
+
     //team
     var teamContainer = $('.js-team-gallery'),
         teamItems = $('.js-team-img');
@@ -84,6 +105,17 @@ $(document).ready(function() {
     window.onload = function(){
         $('.js-team-gallery').trigger('scroll');
     };
+
+    $('.js-team-img').hover(function(){
+        var sectionIndex = $(this).parent().index();
+        $('.js-team-img').addClass('hide');
+        $(this).removeClass('hide').addClass('hover');
+        $('.js-team-item').addClass('hide');
+        $('.js-team-item').eq(sectionIndex).removeClass('hide').addClass('hover');
+    }, function(){
+        $('.js-team-img').removeClass('hide hover');
+        $('.js-team-item').removeClass('hide hover');
+    })
 
     //program tabs
     $(document).on('click', '.js-program-info-btn', function(){
